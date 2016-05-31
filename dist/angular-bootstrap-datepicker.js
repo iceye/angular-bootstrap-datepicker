@@ -3292,7 +3292,7 @@ dp.directive('ngDatepicker', function() {
 
 		scope.$watch('dateOptions', function(newValue) {
 		  var dateTmp;
-		  dateTmp = element.datepicker(newValue).getDate();
+		  dateTmp = element.val();
 		  element.datepicker('remove');
 		  element.datepicker(newValue);
 		  element.datepicker(newValue).setDate(dateTmp);
