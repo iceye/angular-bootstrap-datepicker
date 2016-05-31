@@ -37,9 +37,8 @@ dp.directive('ngDatepicker', function() {
 		  var dateTmp;
 		  dateTmp = element.val();
 		  element.datepicker('remove');
-		  element.datepicker(newValue);
-		  element.datepicker(newValue).setDate(dateTmp);
 		  element.datepicker(newValue).on('changeDate', changeBooking);
+		  element.datepicker('update', dateTmp);
 		});
 
 		element.find('input').on('focus', function() {
