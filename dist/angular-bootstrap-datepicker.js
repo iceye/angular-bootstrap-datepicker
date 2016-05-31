@@ -3255,7 +3255,7 @@
 	};
 }(jQuery));
 
-var dp;
+var changeBooking, dp;
 
 dp = angular.module('ng-bootstrap-datepicker', []);
 
@@ -3269,27 +3269,42 @@ dp.directive('ngDatepicker', function() {
     },
     template: "<input type=\"text\">",
     link: function(scope, element) {
-      scope.inputHasFocus = false;
-      element.datepicker(scope.dateOptions).on('changeDate', function(e) {
-        var defaultFormat, defaultLanguage, format, language;
-        defaultFormat = $.fn.datepicker.defaults.format;
-        format = scope.dateOptions.format || defaultFormat;
-        defaultLanguage = $.fn.datepicker.defaults.language;
-        language = scope.dateOptions.language || defaultLanguage;
-        return scope.$apply(function() {
-          return scope.ngModel = e !== void 0 ? e.target.value : '';
-        });
-      });
-      element.find('input').on('focus', function() {
-        return scope.inputHasFocus = true;
-      }).on('blur', function() {
-        return scope.inputHasFocus = false;
-      });
-      return scope.$watch('ngModel', function(newValue) {
-        if (!scope.inputHasFocus) {
-          return element.datepicker('update', newValue);
-        }
-      });
-    }
+		scope.inputHasFocus = false;
+
+		changeBooking = function(e) {
+		  var defaultFormat, defaultLanguage, format, language;
+		  defaultFormat = $.fn.datepicker.defaults.format;
+		  format = scope.dateOptions.format || defaultFormat;
+		  defaultLanguage = $.fn.datepicker.defaults.language;
+		  language = scope.dateOptions.language || defaultLanguage;
+		  return scope.$apply(function() {
+		    scope.ngModel = e !== void 0 ? e.target.value : '';
+		  });
+		};
+
+		element.datepicker(scope.dateOptions).on('changeDate', changeBooking);
+
+		scope.$watch('ngModel', function(newValue) {
+		  if (!scope.inputHasFocus) {
+		    element.datepicker('update', newValue);
+		  }
+		});
+
+		scope.$watch('dateOptions', function(newValue) {
+		  var dateTmp;
+		  dateTmp = element.datepicker(newValue).getDate();
+		  element.datepicker('remove');
+		  element.datepicker(newValue);
+		  element.datepicker(newValue).setDate(dateTmp);
+		  element.datepicker(newValue).on('changeDate', changeBooking);
+		});
+
+		element.find('input').on('focus', function() {
+		  scope.inputHasFocus = true;
+		}).on('blur', function() {
+		  scope.inputHasFocus = false;
+		});
+
+	}
   };
 });

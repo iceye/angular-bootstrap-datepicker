@@ -4,19 +4,11 @@ module.exports = (grunt) ->
 
     clean: ['bower_components', 'node_modules']
 
-    coffee:
-      compile:
-        files:
-          'js/src.js': ['src/**/*.coffee']
-        options:
-          bare: true
-          sourceMap: false
-
     concat:
       js:
         src: ['bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js',
           'bower_components/bootstrap-datepicker/js/locales/*.js',
-          'js/src.js']
+          'src/angular-bootstrap-datepicker-directive.js']
 
         dest: 'dist/angular-bootstrap-datepicker.js'
       css:
@@ -36,9 +28,9 @@ module.exports = (grunt) ->
         spawn: false
         debounceDelay: 50
         atBegin: true
-      coffee:
-        files: 'src/**/*.coffee'
-        tasks: ['coffee:compile', 'concat', 'uglify:main']
+      concat:
+        files: 'src/**/*.js'
+        tasks: ['concat', 'uglify:main']
 
     cssmin:
       dist:
@@ -47,7 +39,6 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-concat'
-  grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'

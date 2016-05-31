@@ -12,7 +12,6 @@
   "author": "Carl Letourneau, R. Batlle",
   "license": "Apache-2.0",
   "devDependencies": {
-    "coffee-script": "^1.10.0",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-contrib-clean": "^1.0.0",
