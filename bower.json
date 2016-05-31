@@ -8,7 +8,7 @@
     "dist/angular-bootstrap-datepicker.min.css"
   ],
   "authors": [
-    "Carl Létourneau, R. Batlle"
+    "Carl Létourneau, R. Batlle, Sandro Bottoni"
   ],
   "ignore": [
     "**/.*",
