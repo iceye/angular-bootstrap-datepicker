@@ -3268,7 +3268,7 @@ dp.directive('ngDatepicker', function() {
       ngModel: '='
     },
     template: "<input type=\"text\">",
-    link: function(scope, element) {
+    link: function($timeout, scope, element) {
 		scope.inputHasFocus = false;
 
 		changeBooking = function(e) {
@@ -3293,11 +3293,11 @@ dp.directive('ngDatepicker', function() {
 		scope.$watch('dateOptions', function(newValue) {
 		  var dateTmp;
 		  dateTmp = element.val();
-		  scope.$apply(function() {
+		  $timeout(function() {
 			  element.datepicker('destroy');
     		  element.datepicker(newValue).on('changeDate', changeBooking);
     		  element.datepicker('update', dateTmp);
-		  });
+		  },0);
 
 		}, true);
 
