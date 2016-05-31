@@ -8,21 +8,27 @@ dp.directive('ngDatepicker', function($timeout) {
     replace: true,
     scope: {
       dateOptions: '=',
+	  ngChange: '=?',
       ngModel: '='
     },
     template: "<input type=\"text\">",
     link: function(scope, element) {
+		var imChangingi
 		scope.inputHasFocus = false;
 
 		changeBooking = function(e) {
-		  var defaultFormat, defaultLanguage, format, language;
-		  defaultFormat = $.fn.datepicker.defaults.format;
-		  format = scope.dateOptions.format || defaultFormat;
-		  defaultLanguage = $.fn.datepicker.defaults.language;
-		  language = scope.dateOptions.language || defaultLanguage;
-		  return scope.$apply(function() {
-		    scope.ngModel = e !== void 0 ? e.target.value : '';
-		  });
+			var defaultFormat, defaultLanguage, format, language;
+			defaultFormat = $.fn.datepicker.defaults.format;
+			format = scope.dateOptions.format || defaultFormat;
+			defaultLanguage = $.fn.datepicker.defaults.language;
+			language = scope.dateOptions.language || defaultLanguage;
+			return scope.$apply(function() {
+				scope.ngModel = e !== void 0 ? e.target.value : '';
+				if(typeof scope.ngChange === 'function'){
+					scope.ngChange(element.datepicker().val());
+				}
+			});
+
 		};
 
 		element.datepicker(scope.dateOptions).on('changeDate', changeBooking);
@@ -37,7 +43,7 @@ dp.directive('ngDatepicker', function($timeout) {
 		  var dateTmp;
 		  $timeout(function() {
 			  element.datepicker('destroy');
-    		  element.datepicker(newValue).on('changeDate', changeBooking);
+    		  element.datepicker(newValue);
 		  },0,false);
 
 		}, true);
