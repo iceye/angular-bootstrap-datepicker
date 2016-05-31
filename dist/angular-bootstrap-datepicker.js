@@ -3259,7 +3259,7 @@ var changeBooking, dp;
 
 dp = angular.module('ng-bootstrap-datepicker', []);
 
-dp.directive('ngDatepicker', function() {
+dp.directive('ngDatepicker', function($timeout) {
   return {
     restrict: 'A',
     replace: true,
@@ -3268,7 +3268,7 @@ dp.directive('ngDatepicker', function() {
       ngModel: '='
     },
     template: "<input type=\"text\">",
-    link: function($timeout, scope, element) {
+    link: function(scope, element) {
 		scope.inputHasFocus = false;
 
 		changeBooking = function(e) {
@@ -3297,7 +3297,7 @@ dp.directive('ngDatepicker', function() {
 			  element.datepicker('destroy');
     		  element.datepicker(newValue).on('changeDate', changeBooking);
     		  element.datepicker('update', dateTmp);
-		  },0);
+		  },0,false);
 
 		}, true);
 
