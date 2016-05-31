@@ -36,7 +36,7 @@ dp.directive('ngDatepicker', function() {
 		scope.$watch('dateOptions', function(newValue) {
 		  var dateTmp;
 		  dateTmp = element.val();
-		  element.datepicker('remove');
+		  element.datepicker('destroy');
 		  element.datepicker(newValue).on('changeDate', changeBooking);
 		  element.datepicker('update', dateTmp);
 		});
