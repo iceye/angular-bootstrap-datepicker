@@ -3296,7 +3296,7 @@ dp.directive('ngDatepicker', function() {
 		  element.datepicker('destroy');
 		  element.datepicker(newValue).on('changeDate', changeBooking);
 		  element.datepicker('update', dateTmp);
-		});
+		}, true);
 
 		element.find('input').on('focus', function() {
 		  scope.inputHasFocus = true;
