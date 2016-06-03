@@ -18,7 +18,7 @@
     "build"
   ],
   "dependencies": {
-    "jquery": "~1.11.1",
+    "jquery": ">=1.11.1",
     "bootstrap": "~3.3.6",
     "bootstrap-datepicker": "~1.6.1"
   },
